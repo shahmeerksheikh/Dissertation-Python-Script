@@ -289,7 +289,7 @@ def main():
 if __name__ == "__main__":
     predictor, results_dir = main()
 
-
+-----------------------------------------------------------------
   import ee
 import pandas as pd
 from datetime import datetime, timedelta
@@ -933,49 +933,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-# =========================
-# 2️⃣1️⃣ OPTIONAL: GEEMAP VISUALIZATION
-# =========================
-
-def create_interactive_map():
-    """
-    Optional function to create interactive maps using geemap
-    Requires: pip install geemap
-    """
-    try:
-        import geemap
-        
-        # Create interactive map
-        Map = geemap.Map(center=[29.5, 71.5], zoom=7)
-        
-        # Add layers
-        Map.addLayer(districts, {}, 'South Punjab Districts')
-        Map.addLayer(
-            rainfall_stats.select('precipitation_sum'), 
-            {'min': 0, 'max': 1000, 'palette': ['white', 'lightblue', 'blue', 'darkblue']}, 
-            'Total Rainfall (mm)'
-        )
-        Map.addLayer(
-            slope, 
-            {'min': 0, 'max': 30, 'palette': ['green', 'yellow', 'orange', 'red']}, 
-            'Slope (degrees)'
-        )
-        Map.addLayer(
-            flood_risk_index, 
-            {'min': 0, 'max': 300, 'palette': ['green', 'yellow', 'orange', 'red']}, 
-            'Preliminary Flood Risk Index'
-        )
-        
-        return Map
-        
-    except ImportError:
-        print("⚠️ geemap not installed. Install with: pip install geemap")
-        return None
-
-# Uncomment to create interactive map
-# interactive_map = create_interactive_map()
-# if interactive_map:
-#     interactive_map.to_html('south_punjab_flood_map.html')
-#     print(" Interactive map saved as 'south_punjab_flood_map.html'")
-
